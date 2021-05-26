@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../store';
@@ -12,8 +11,6 @@ export default function Filters() {
   const dispatch = useDispatch();
   const shapesInStore = useSelector((state: RootState) => state.shapes);
   const coloursInStore = useSelector((state: RootState) => state.colours);
-
-  console.log({ shapes, shapesInStore, colours, coloursInStore });
 
   function filterColour(colour: string) {
     return function () {

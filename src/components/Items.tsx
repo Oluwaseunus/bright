@@ -1,31 +1,29 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { items, filters } from '../data.json';
+
 import { RootState } from '../store';
+import { items, filters } from '../data.json';
+
+function generateHeader(shapes: string[], colours: string[]): string {
+  const shapesLength = shapes.length;
+  const coloursLength = colours.length;
+  const maxShapesLength = filters.shapes.length;
+  const maxColoursLength = filters.colours.length;
+  const allItemsLength = maxShapesLength + maxColoursLength;
+
+  if (shapesLength + coloursLength === allItemsLength) return 'All Items';
+  else if (shapesLength === maxShapesLength) {
+    if (coloursLength === 1) return `All ${colours[0]} items`;
+  } else if (coloursLength === maxColoursLength) {
+    if (shapesLength === 1) return `All ${shapes[0]} items`;
+  } else if (coloursLength === 1 && shapesLength === 1)
+    return `${shapes[0]} ${colours[0]} Items`;
+  return `Multiple Items`;
+}
 
 export default function Items() {
   const shapesInStore = useSelector((state: RootState) => state.shapes);
   const coloursInStore = useSelector((state: RootState) => state.colours);
-
-  const filteredShapesLength = shapesInStore.length;
-  const filteredColoursLength = coloursInStore.length;
-
-  let header;
-
-  const numberOfFilters = Object.values(filters).flat().length;
-  if (numberOfFilters === filteredShapesLength + filteredColoursLength) {
-    header = 'All items';
-  } else if (
-    shapesInStore.length === 1 &&
-    coloursInStore.length === filters.colours.length
-  ) {
-    header = `All ${shapesInStore[0]} items`;
-  } else if (
-    coloursInStore.length === 1 &&
-    shapesInStore.length === filters.shapes.length
-  ) {
-    header = `All ${coloursInStore[0]} items`;
-  } else header = 'Multiple items';
 
   const filteredItems = items.filter(
     item =>
@@ -34,8 +32,8 @@ export default function Items() {
 
   return (
     <div>
-      <h3>{header}.</h3>
-      <p>({filteredItems.length})</p>
+      <h3>{generateHeader(shapesInStore, coloursInStore)}.</h3>
+      <span>({filteredItems.length})</span>
 
       {filteredItems.map(({ shape, colour }) => (
         <div key={`${shape}+${colour}`}>
