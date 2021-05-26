@@ -1,0 +1,43 @@
+{
+  "filters": {
+    "shapes": ["Oval", "Round", "Triangle", "Square", "Rectangle"],
+    "colours": ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
+  },
+  "items": [
+    { "shape": "Oval", "colour": "red" },
+    { "shape": "Oval", "colour": "orange" },
+    { "shape": "Oval", "colour": "yellow" },
+    { "shape": "Oval", "colour": "green" },
+    { "shape": "Oval", "colour": "blue" },
+    { "shape": "Oval", "colour": "indigo" },
+    { "shape": "Oval", "colour": "violet" },
+    { "shape": "Round", "colour": "red" },
+    { "shape": "Round", "colour": "orange" },
+    { "shape": "Round", "colour": "yellow" },
+    { "shape": "Round", "colour": "green" },
+    { "shape": "Round", "colour": "blue" },
+    { "shape": "Round", "colour": "indigo" },
+    { "shape": "Round", "colour": "violet" },
+    { "shape": "Triangle", "colour": "red" },
+    { "shape": "Triangle", "colour": "orange" },
+    { "shape": "Triangle", "colour": "yellow" },
+    { "shape": "Triangle", "colour": "green" },
+    { "shape": "Triangle", "colour": "blue" },
+    { "shape": "Triangle", "colour": "indigo" },
+    { "shape": "Triangle", "colour": "violet" },
+    { "shape": "Square", "colour": "red" },
+    { "shape": "Square", "colour": "orange" },
+    { "shape": "Square", "colour": "yellow" },
+    { "shape": "Square", "colour": "green" },
+    { "shape": "Square", "colour": "blue" },
+    { "shape": "Square", "colour": "indigo" },
+    { "shape": "Square", "colour": "violet" },
+    { "shape": "Rectangle", "colour": "red" },
+    { "shape": "Rectangle", "colour": "orange" },
+    { "shape": "Rectangle", "colour": "yellow" },
+    { "shape": "Rectangle", "colour": "green" },
+    { "shape": "Rectangle", "colour": "blue" },
+    { "shape": "Rectangle", "colour": "indigo" },
+    { "shape": "Rectangle", "colour": "violet" }
+  ]
+}

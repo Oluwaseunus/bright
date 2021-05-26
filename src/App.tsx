@@ -1,11 +1,8 @@
 import React from 'react';
-import {
-  Route,
-  Switch,
-  Redirect,
-  BrowserRouter as Router,
-} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 
+import { store } from './store';
 import Login from './pages/Login';
 import Shapes from './pages/Shapes';
 
@@ -43,16 +40,18 @@ function App() {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Login} />
-            <ProtectedRoute
-              path="/shapes"
-              component={Shapes}
-              isLoggedIn={isLoggedIn}
-            />
-          </Switch>
-        </Router>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <ProtectedRoute
+                path="/shapes"
+                component={Shapes}
+                isLoggedIn={isLoggedIn}
+              />
+            </Switch>
+          </BrowserRouter>
+        </Provider>
       )}
     </>
   );

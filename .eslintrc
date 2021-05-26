@@ -1,5 +1,9 @@
-{
-  "extends": ["wesbos", "plugin:import/typescript"],
+/* {
+  "extends": [
+    "wesbos",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "rules": {
     "react/jsx-filename-extension": [
       1,
@@ -9,3 +13,4 @@
     ]
   }
 }
+ */
