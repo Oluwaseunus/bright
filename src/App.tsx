@@ -1,25 +1,60 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  Route,
+  Switch,
+  Redirect,
+  BrowserRouter as Router,
+} from 'react-router-dom';
+
+import Login from './pages/Login';
+import Shapes from './pages/Shapes';
+
 import './App.css';
 
+interface ProtectedRouteProps {
+  path: string;
+  exact?: boolean;
+  isLoggedIn: boolean;
+  component: React.ComponentType;
+}
+
+function ProtectedRoute({
+  path,
+  exact,
+  component,
+  isLoggedIn,
+}: ProtectedRouteProps) {
+  if (!isLoggedIn) return <Redirect to="/" />;
+  return <Route path={path} exact={exact} component={component} />;
+}
+
 function App() {
+  const [loading, setLoading] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) setIsLoggedIn(true);
+    setLoading(false);
+  }, [loading]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <ProtectedRoute
+              path="/shapes"
+              component={Shapes}
+              isLoggedIn={isLoggedIn}
+            />
+          </Switch>
+        </Router>
+      )}
+    </>
   );
 }
 
