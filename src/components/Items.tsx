@@ -45,6 +45,19 @@ const StyledItems = styled.div`
   grid-template-columns: repeat(5, 1fr);
 `;
 
+const StyledItemsPage = styled.div`
+  p {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+
+    span {
+      font-size: 1.6rem;
+      font-weight: normal;
+    }
+  }
+`;
+
 function generateHeader(shapes: string[], colours: string[]): string {
   const shapesLength = shapes.length;
   const coloursLength = colours.length;
@@ -58,7 +71,7 @@ function generateHeader(shapes: string[], colours: string[]): string {
   } else if (coloursLength === maxColoursLength) {
     if (shapesLength === 1) return `All ${shapes[0]} items`;
   } else if (coloursLength === 1 && shapesLength === 1)
-    return `${shapes[0]} ${colours[0]} Items`;
+    return `${colours[0]} ${shapes[0]} Items`;
   return `Multiple Items`;
 }
 
@@ -72,9 +85,11 @@ export default function Items() {
   );
 
   return (
-    <div>
-      <h3>{generateHeader(shapesInStore, coloursInStore)}.</h3>
-      <span>({filteredItems.length})</span>
+    <StyledItemsPage>
+      <p>
+        {generateHeader(shapesInStore, coloursInStore)}.
+        <span> ({filteredItems.length})</span>
+      </p>
 
       <StyledItems>
         {filteredItems.map(({ shape, colour }) => (
@@ -83,6 +98,6 @@ export default function Items() {
           </StyledShapeItem>
         ))}
       </StyledItems>
-    </div>
+    </StyledItemsPage>
   );
 }

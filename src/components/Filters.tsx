@@ -13,19 +13,29 @@ const StyledFilters = styled.div`
     font-size: 2rem;
   }
 
-  button.active {
-    border: 1px solid var(--border-blue);
+  button {
+    border: 1px solid #eee;
+
+    &.active {
+      border: 1px solid rgba(var(--border-blue));
+    }
   }
 `;
 
 const StyledShapeButton = styled.button`
+  --background: none;
+
   width: fit-content;
   font-size: 1.6rem;
   margin: 0 1rem;
   padding: 0.5rem 1rem;
   border-radius: 5rem;
-  border: none;
+  background: var(--background);
   cursor: pointer;
+
+  &.active {
+    --background: rgba(var(--border-blue), 0.3);
+  }
 `;
 
 const StyledColourButton = styled.button`
@@ -35,6 +45,7 @@ const StyledColourButton = styled.button`
   margin: 0 1.5rem;
   border-radius: 50%;
   background-color: ${props => props.color};
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
 export default function Filters() {
