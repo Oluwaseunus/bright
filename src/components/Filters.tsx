@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../store';
@@ -6,6 +7,35 @@ import { addShape, removeShape } from '../store/actions/shapes';
 import { addColour, removeColour } from '../store/actions/colours';
 
 const { shapes, colours } = filters;
+
+const StyledFilters = styled.div`
+  h3 {
+    font-size: 2rem;
+  }
+
+  button.active {
+    border: 1px solid var(--border-blue);
+  }
+`;
+
+const StyledShapeButton = styled.button`
+  width: fit-content;
+  font-size: 1.6rem;
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5rem;
+  border: none;
+  cursor: pointer;
+`;
+
+const StyledColourButton = styled.button`
+  border: none;
+  width: 3rem;
+  height: 3rem;
+  margin: 0 1.5rem;
+  border-radius: 50%;
+  background-color: ${props => props.color};
+`;
 
 export default function Filters() {
   const dispatch = useDispatch();
@@ -33,22 +63,35 @@ export default function Filters() {
   }
 
   return (
-    <div>
-      <p>Filters</p>
+    <StyledFilters>
+      <h3>Filters</h3>
       <div>
         {shapes.map(shape => (
-          <button onClick={filterShape(shape)} type="button" key={shape}>
+          <StyledShapeButton
+            key={shape}
+            type="button"
+            onClick={filterShape(shape)}
+            className={shapesInStore.includes(shape) ? 'active' : ''}
+          >
             {shape}
-          </button>
+          </StyledShapeButton>
         ))}
       </div>
+      <h3>Colors</h3>
       <div>
         {colours.map(colour => (
-          <button onClick={filterColour(colour)} type="button" key={colour}>
-            {colour}
-          </button>
+          <StyledColourButton
+            key={colour}
+            type="button"
+            color={colour}
+            title={colour}
+            onClick={filterColour(colour)}
+            className={coloursInStore.includes(colour) ? 'active' : ''}
+          >
+            &nbsp;
+          </StyledColourButton>
         ))}
       </div>
-    </div>
+    </StyledFilters>
   );
 }

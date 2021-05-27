@@ -1,8 +1,49 @@
-import React from 'react';
+import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../store';
 import { items, filters } from '../data.json';
+
+const StyledShapeItem = styled.div`
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  background: white;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledShape = styled.div`
+  --clip-path: inset(0);
+
+  width: 11.25rem;
+  height: 11.25rem;
+  clip-path: var(--clip-path);
+  background: ${props => props.color};
+
+  &[data-shape='Oval'] {
+    --clip-path: ellipse(30% 40% at 50% 50%);
+  }
+
+  &[data-shape='Round'] {
+    --clip-path: circle(50% at 50% 50%);
+  }
+
+  &[data-shape='Triangle'] {
+    --clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
+
+  &[data-shape='Rectangle'] {
+    --clip-path: inset(15% 0);
+  }
+`;
+
+const StyledItems = styled.div`
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center;
+  grid-template-columns: repeat(5, 1fr);
+`;
 
 function generateHeader(shapes: string[], colours: string[]): string {
   const shapesLength = shapes.length;
@@ -35,11 +76,13 @@ export default function Items() {
       <h3>{generateHeader(shapesInStore, coloursInStore)}.</h3>
       <span>({filteredItems.length})</span>
 
-      {filteredItems.map(({ shape, colour }) => (
-        <div key={`${shape}+${colour}`}>
-          {shape} {colour}
-        </div>
-      ))}
+      <StyledItems>
+        {filteredItems.map(({ shape, colour }) => (
+          <StyledShapeItem key={`${shape}+${colour}`}>
+            <StyledShape color={colour} data-shape={shape} />
+          </StyledShapeItem>
+        ))}
+      </StyledItems>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import { store } from './store';
 import Login from './pages/Login';
 import Shapes from './pages/Shapes';
+import GlobalStyles from './styles/GlobalStyles';
 
 import './App.css';
 
@@ -41,6 +42,7 @@ function App() {
         <div>Loading...</div>
       ) : (
         <Provider store={store}>
+          <GlobalStyles />
           <BrowserRouter>
             <Switch>
               <Route exact path="/" component={Login} />
