@@ -24,6 +24,9 @@ export default function (state = initialState, action: ShapeActions) {
 
     case 'remove_shape': {
       if (state.length === 1) return initialState;
+      else if (state.length === initialState.length) {
+        return [action.shape];
+      }
 
       const shapes = Object.assign([], state);
       const index = shapes.findIndex(shape => shape === action.shape);

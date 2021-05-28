@@ -5,7 +5,7 @@ import Items from '../components/Items';
 import Filters from '../components/Filters';
 
 const StyledBody = styled.div`
-  width: 75%;
+  width: var(--page-width);
   margin: 0 auto;
 `;
 

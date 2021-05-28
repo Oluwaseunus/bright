@@ -24,6 +24,9 @@ export default function (state = initialState, action: ColourActions) {
 
     case 'remove_colour': {
       if (state.length === 1) return initialState;
+      else if (state.length === initialState.length) {
+        return [action.colour];
+      }
 
       const colours = Object.assign([], state);
       const index = colours.findIndex(colour => colour === action.colour);

@@ -10,7 +10,7 @@ const StyledNav = styled.nav`
   .content {
     display: flex;
     justify-content: space-between;
-    width: 75%;
+    width: var(--page-width);
     margin: auto;
   }
 

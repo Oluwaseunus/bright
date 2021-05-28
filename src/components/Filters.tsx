@@ -27,7 +27,7 @@ const StyledShapeButton = styled.button`
 
   width: fit-content;
   font-size: 1.6rem;
-  margin: 0 1rem;
+  margin: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 5rem;
   background: var(--background);
@@ -42,10 +42,15 @@ const StyledColourButton = styled.button`
   border: none;
   width: 3rem;
   height: 3rem;
-  margin: 0 1.5rem;
+  margin: 1.5rem;
   border-radius: 50%;
   background-color: ${props => props.color};
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  @media (max-width: 540px) {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 `;
 
 export default function Filters() {

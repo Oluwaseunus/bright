@@ -5,7 +5,7 @@ import { RootState } from '../store';
 import { items, filters } from '../data.json';
 
 const StyledShapeItem = styled.div`
-  width: 20rem;
+  width: 100%;
   height: 20rem;
   display: flex;
   background: white;
@@ -40,9 +40,8 @@ const StyledShape = styled.div`
 
 const StyledItems = styled.div`
   display: grid;
-  gap: 1.5rem;
-  justify-items: center;
-  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 `;
 
 const StyledItemsPage = styled.div`
