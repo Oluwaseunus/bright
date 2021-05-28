@@ -86,6 +86,7 @@ export default function Filters() {
           <StyledShapeButton
             key={shape}
             type="button"
+            title={shape}
             onClick={filterShape(shape)}
             className={shapesInStore.includes(shape) ? 'active' : ''}
           >
