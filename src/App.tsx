@@ -1,13 +1,12 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-import { store } from './store';
 import Login from './pages/Login';
+import { RootState } from './store';
 import Shapes from './pages/Shapes';
+import { logIn } from './store/actions/auth';
 import GlobalStyles from './styles/GlobalStyles';
-
-import './App.css';
 
 interface ProtectedRouteProps {
   path: string;
@@ -27,33 +26,32 @@ function ProtectedRoute({
 }
 
 function App() {
+  const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(true);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const isLoggedIn = useSelector((state: RootState) => state.auth);
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) setIsLoggedIn(true);
+    if (token) dispatch(logIn());
     setLoading(false);
-  }, [loading]);
+  }, []);
 
   return (
     <>
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <Provider store={store}>
+        <>
           <GlobalStyles />
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <ProtectedRoute
-                path="/shapes"
-                component={Shapes}
-                isLoggedIn={isLoggedIn}
-              />
-            </Switch>
-          </BrowserRouter>
-        </Provider>
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <ProtectedRoute
+              path="/shapes"
+              component={Shapes}
+              isLoggedIn={isLoggedIn}
+            />
+          </Switch>
+        </>
       )}
     </>
   );

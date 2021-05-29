@@ -1,5 +1,8 @@
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
+import { logOut } from '../store/actions/auth';
 import { ReactComponent as LogoutIcon } from '../assets/svgs/logout.svg';
 
 const StyledNav = styled.nav`
@@ -36,9 +39,11 @@ const StyledNav = styled.nav`
 
 export default function Nav() {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   function handleLogout() {
     localStorage.removeItem('token');
+    dispatch(logOut());
     history.push('/');
   }
 

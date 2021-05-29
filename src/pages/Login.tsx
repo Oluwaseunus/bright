@@ -1,5 +1,10 @@
+import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { RootState } from '../store';
+import { logIn } from '../store/actions/auth';
 
 const StyledLogin = styled.div`
   width: 100vw;
@@ -37,9 +42,18 @@ const StyledLogin = styled.div`
 
 export default function Login() {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: RootState) => state.auth);
+
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      history.push('/shapes');
+    }
+  }, [isLoggedIn]);
 
   function handleLogin() {
     localStorage.setItem('token', 'token');
+    dispatch(logIn());
     history.push('/shapes');
   }
 
