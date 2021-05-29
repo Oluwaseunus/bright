@@ -55,8 +55,9 @@ const StyledColourButton = styled.button`
 
 export default function Filters() {
   const dispatch = useDispatch();
-  const shapesInStore = useSelector((state: RootState) => state.shapes);
-  const coloursInStore = useSelector((state: RootState) => state.colours);
+  const [shapesInStore, coloursInStore] = useSelector(
+    ({ shapes, colours }: RootState) => [shapes, colours]
+  );
 
   function filterColour(colour: string) {
     return function () {

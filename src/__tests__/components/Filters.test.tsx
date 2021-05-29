@@ -5,6 +5,7 @@ import { render, screen, fireEvent } from '../../test-utils';
 import Filters from '../../components/Filters';
 
 describe('Filters', () => {
+  const dummyDispatch = jest.fn();
   const useSelectorMock = jest.spyOn(reactRedux, 'useSelector');
   const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch');
 
@@ -12,12 +13,7 @@ describe('Filters', () => {
     useSelectorMock.mockClear();
     useDispatchMock.mockClear();
 
-    // The return values must be mocked in the order that they're called in the component
-    useSelectorMock
-      .mockReturnValueOnce(filters.shapes)
-      .mockReturnValueOnce(filters.colours);
-
-    const dummyDispatch = jest.fn();
+    useSelectorMock.mockReturnValue([filters.shapes, filters.colours]);
     useDispatchMock.mockReturnValue(dummyDispatch);
   });
 
@@ -31,17 +27,19 @@ describe('Filters', () => {
   });
 
   test('clicking on a filter dispatches an action', () => {
-    const { shapes, colours } = filters;
-    expect(useDispatchMock).not.toHaveBeenCalled();
-
     const { getByText, getByTitle } = render(<Filters />);
-    const [firstShape] = shapes;
-    const [firstColour] = colours;
+    expect(useDispatchMock).toHaveBeenCalledTimes(1);
+    expect(dummyDispatch).not.toHaveBeenCalled();
+
+    const {
+      shapes: [firstShape],
+      colours: [firstColour],
+    } = filters;
 
     fireEvent.click(getByText(firstShape));
-    expect(useDispatchMock).toHaveBeenCalledTimes(1);
+    expect(dummyDispatch).toHaveBeenCalledTimes(1);
 
     fireEvent.click(getByTitle(firstColour));
-    expect(useSelectorMock).toHaveBeenCalledTimes(2);
+    expect(dummyDispatch).toHaveBeenCalledTimes(2);
   });
 });

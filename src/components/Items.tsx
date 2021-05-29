@@ -75,8 +75,9 @@ function generateHeader(shapes: string[], colours: string[]): string {
 }
 
 export default function Items() {
-  const shapesInStore = useSelector((state: RootState) => state.shapes);
-  const coloursInStore = useSelector((state: RootState) => state.colours);
+  const [shapesInStore, coloursInStore] = useSelector(
+    ({ shapes, colours }: RootState) => [shapes, colours]
+  );
 
   const filteredItems = items.filter(
     item =>
@@ -87,12 +88,12 @@ export default function Items() {
     <StyledItemsPage>
       <p>
         {generateHeader(shapesInStore, coloursInStore)}.
-        <span> ({filteredItems.length})</span>
+        <span title="Number of Items"> ({filteredItems.length})</span>
       </p>
 
       <StyledItems>
         {filteredItems.map(({ shape, colour }) => (
-          <StyledShapeItem key={`${shape}+${colour}`}>
+          <StyledShapeItem key={`${shape}+${colour}`} role="listitem">
             <StyledShape color={colour} data-shape={shape} />
           </StyledShapeItem>
         ))}
