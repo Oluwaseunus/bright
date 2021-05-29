@@ -1,3 +1,4 @@
+import { logIn, logOut } from '../../store/actions/auth';
 import { addShape, removeShape } from '../../store/actions/shapes';
 import { addColour, removeColour } from '../../store/actions/colours';
 
@@ -33,6 +34,16 @@ describe('Actions', () => {
     it('should create an action to remove a shape', () => {
       expectedAction.type = 'remove_shape';
       expect(removeShape(shape)).toEqual(expectedAction);
+    });
+  });
+
+  describe('Auth Actions', () => {
+    it('should create a login action', () => {
+      expect(logIn()).toEqual({ type: 'log_in' });
+    });
+
+    it('should create a log out action', () => {
+      expect(logOut()).toEqual({ type: 'log_out' });
     });
   });
 });
