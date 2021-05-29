@@ -2,17 +2,17 @@ import { filters } from '../../data.json';
 
 const initialState = filters.shapes;
 
-interface AddShapeAction {
+export interface AddShapeAction {
   type: 'add_shape';
   shape: string;
 }
 
-interface RemoveShapeAction {
+export interface RemoveShapeAction {
   type: 'remove_shape';
   shape: string;
 }
 
-type ShapeActions = AddShapeAction | RemoveShapeAction;
+export type ShapeActions = AddShapeAction | RemoveShapeAction;
 
 export default function (state = initialState, action: ShapeActions) {
   switch (action.type) {
