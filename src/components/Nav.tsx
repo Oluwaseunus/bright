@@ -45,8 +45,8 @@ export default function Nav() {
   return (
     <StyledNav>
       <div className="content">
-        <h1>SHAPES</h1>
-        <button onClick={handleLogout} type="button">
+        <h1 role="heading">SHAPES</h1>
+        <button onClick={handleLogout} type="button" role="button">
           Logout <LogoutIcon />
         </button>
       </div>

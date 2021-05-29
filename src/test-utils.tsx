@@ -5,18 +5,18 @@ import { createStore, Store } from 'redux';
 import reducer from './store/reducers/rootReducer';
 import { render as rtlRender } from '@testing-library/react';
 
-interface RenderWithReduxProps {
+interface RenderWithProvidersProps {
   initialState?: RootState;
   store?: Store<RootState>;
 }
 
-function renderWithRedux(
+function renderWithProviders(
   ui: React.ReactElement,
   {
     initialState,
     store = createStore(reducer, initialState),
     ...renderOptions
-  }: RenderWithReduxProps = {}
+  }: RenderWithProvidersProps = {}
 ) {
   function Wrapper({ children }: React.PropsWithChildren<{}>) {
     return <Provider store={store}>{children}</Provider>;
@@ -25,4 +25,4 @@ function renderWithRedux(
 }
 
 export * from '@testing-library/react';
-export { renderWithRedux as render };
+export { renderWithProviders as render };
