@@ -47,7 +47,7 @@ export default function Login() {
     <StyledLogin>
       <div className="content">
         <p>Click the button to Login</p>
-        <button onClick={handleLogin} type="button">
+        <button onClick={handleLogin} type="button" role="button">
           Log in
         </button>
       </div>
