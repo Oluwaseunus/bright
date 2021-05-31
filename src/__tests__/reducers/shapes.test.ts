@@ -4,7 +4,7 @@ import reducer, { ShapeActions } from '../../store/reducers/shapes';
 
 describe('Shapes Reducer', () => {
   it('should return the initial state', () => {
-    const invalidState = { type: '', shape: 'Red' };
+    const invalidState = { type: '', shape: 'Oval' };
 
     expect(reducer(undefined, invalidState as ShapeActions)).toEqual(
       filters.shapes
